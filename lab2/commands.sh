@@ -1,4 +1,4 @@
-\#!/bin/bash
+#!/bin/bash
 
 #mandatory
 wc -l /etc/mtab ; wc -L /etc/mtab
