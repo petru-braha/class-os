@@ -1,0 +1,183 @@
+Flags:
+
+-eq: Equal between 2 int
+=: Equal between 2 strings
+
+$#: Number of arguements
+$0: Name of the script
+$1 $2 $3 ... : The arguement that was given in order to the bash script from the command line
+$@: Used for looping through all arguements - each arguement treated as a seperate quoted string
+$*:  Is a single field for SPACE related arguemnets - all arguements are treated as single quoted string
+$$: Process ID (pid) good for temporary files (MIGHT BE NEEDED FOR THE TEST)
+$!: PID of the last command 
+$?: The code of the last exited command used by: (exit 0....infinity)
+
+-ne: not equal to
+-gt: greater than
+-ge: greater than or equal
+-lt: less than
+-le: less than or equal
+
+-o: or
+-r: checks if it exists and its readable
+
+tr: used for deleting, translating, removing duplicates, squeezing, usages below:
+tr -d '(any letter or word)': It will remove from the specific things anything that has those letters/words you specify
+tr -s '(any letter or word)': It will keep only 1 of the following letter or words, so say "Hello" will become instead "Helo" if you choose the letter l
+tr -d -c '(letter or word)' OR tr -s -c(letter or word)': It will choose the exemption or the complement
+tr -t '(letter or word)' '(letter or word)' : it changes the first one with the second, however if for example (tr -t 'AB' '1') the 'B' wont be changed
+
+uniq: It makes sure that the output cannot be the same as one that already exists
+
+sort: has many uses (over 20 not joking) useful ones:
+sort -b: ignores spaces and tabs when determining the sort keys
+sort -r: reverses, in descending order (A-Z to Z-A)
+sort -n: used for sorting numbered lines aka (2. te 1. et -> 1. et 2. te)
+sort -f: makes the sort not cAsE-SenSitiVe
+sort -o (file): makes all the output be placed in this specific file instead of showing it
+
+>&2: makes an echo into a stderr
+
+Basic Commands:
+
+    pwd: Print working directory.
+    rm -r: Remove directories recursively.
+    cp: Copy files or directories.
+    mv: Move or rename files or directories.
+    cat: Concatenate and display file content.
+    grep: Search for patterns in files.
+    chown: Change file owner.
+    chmod (u-g-o)+r (filename): Makes whoever you choose u(owner) g(group) o(others) be able to read a file.
+
+File Permissions:
+
+    File permissions are represented as three sets of three characters: owner, group, and others.
+    Numeric representation of permissions:
+        0: No permission.
+        1: Execute only.
+        2: Write only.
+        3: Write and execute.
+        4: Read only.
+        5: Read and execute.
+        6: Read and write.
+        7: Read, write, and execute.
+
+Headers:
+
+#include <unistd.h>  // POSIX API for system calls
+#include <fcntl.h>   // File control options
+#include <sys/types.h>  // Data types
+#include <sys/stat.h>   // File status
+#include <sys/wait.h>   // Process management
+#include <signal.h>     // Signal handling
+#include <errno.h>      // Error handling
+#include <stdio.h>      // Standard I/O
+#include <stdlib.h>     // Standard library
+#include <string.h>     // String functions
+#include <pthread.h>    // POSIX threads
+
+File handling:
+
+int open(const char *path, int flags);
+int close(int fd);
+ssize_t read(int fd, void *buf, size_t count);
+ssize_t write(int fd, const void *buf, size_t count);
+off_t lseek(int fd, off_t offset, int whence);
+
+int stat(const char *path, struct stat *buf);
+int mkdir(const char *pathname, mode_t mode);
+DIR *opendir(const char *name);
+struct dirent *readdir(DIR *dirp);
+int closedir(DIR *dirp);
+
+
+Open flags:
+
+    O_RDONLY: Open for reading only.
+    O_WRONLY: Open for writing only.
+    O_RDWR: Open for reading and writing.
+    O_CREAT: Create the file if it does not exist.
+    O_TRUNC: Truncate the file to zero length if it exists.
+    O_APPEND: Set the file offset to the end of the file prior to each write.
+    O_EXCL: Ensure that this call creates the file. If the file already exists, the call will fail.
+    O_NONBLOCK: Open in non-blocking mode.
+    O_SYNC: Write I/O operations on the file descriptor will complete according to the requirements of synchronized I/O data integrity completion.
+    O_DIRECT: Try to minimize cache effects of the I/O to and from this file.
+    O_DIRECTORY: Ensure that the call opens a directory.
+    O_NOFOLLOW: If pathname is a symbolic link, then the open fails.
+
+Bash:
+
+Variables: variable_name=value
+Special Variables:
+
+    $0: Name of the script.
+    $1, $2, ...: Positional parameters.
+    $#: Number of positional parameters.
+    $@: All positional parameters as separate words.
+    $*: All positional parameters as a single word.
+    $?: Exit status of the last command.
+    $$: Process ID of the current script.
+    $!: Process ID of the last background command.
+
+echo "Hello, World!"  # Print to the standard output
+read variable_name    # Read input into a variable
+
+while IFS= read -r line; do
+    echo "$line"
+done < file.txt
+
+---------------------------------------
+echo "Content" > file.txt    # Overwrite file
+echo "Content" >> file.txt   # Append to file
+
+---------------------------------------
+command &      # Run command in background
+pid=$!         # Get PID of the last background command
+wait           # Wait for background processes to finish
+
+---------------------------------------
+
+string="Hello, World!"
+echo ${string:6:5}   # Output: World
+
+---------------------------------------
+
+array=(value1 value2 value3)
+echo ${array[0]}     # Output: value1
+echo ${#array[@]}    # Output: 3 (length of the array)
+
+---------------------------------------
+
+result=$((2 + 3))
+echo $result   # Output: 5
+
+---------------------------------------
+
+Standard Streams:
+
+    stdin (0): Standard input
+    stdout (1): Standard output
+    stderr (2): Standard error
+
+---------------------------------------
+
+command > file.txt          # Redirect stdout to a file (overwrite)
+command >> file.txt         # Redirect stdout to a file (append)
+command 2> error.log        # Redirect stderr to a file
+command > file.txt 2>&1     # Redirect both stdout and stderr to a file
+
+---------------------------------------
+
+result=$(command)     # Capture the output of a command
+
+---------------------------------------
+
+Quoting:
+
+    Single Quotes:
+        Preserve the literal value of each character within the quotes.
+    Double Quotes:
+        Interpret variables and preserve most special characters.
+    Backticks:
+        Execute the enclosed command and substitute its output.

@@ -1,0 +1,237 @@
+Test 1
+--------------------
+1. [bash] Care este numele comenzii care permite aflarea directorului curent de lucru? (0.5p)
+2. [bash] Care este numele comenzii care permite crearea unui director? (0.5p)
+4. [bash] Care este numele comenzii care permite aflarea informațiilor despre utilizarea diverselor comenzi externe? (0.5p)
+5. [bash] Care este forma sintactică de compunere a două comenzi simple pentru execuția celei de a doua comenzi condiționată de succesul execuției primei comenzi? (0.5p)
+-cmd1 ; cmd2
+-cmd1 | cmd2
+-cmd1 & cmd2
+-cmd1 || cmd2
+-cmd1 && cmd2
+(single choice)
+6. [bash] Care este forma sintactică pentru execuția unei comenzi având fluxul stderr redirectat către un fișier, cu append? (0.5p)
+-comanda parametri < fisier.txt
+-comanda parametri > fisier.txt
+-comanda parametri 2> fisier.txt
+-comanda parametri 2>> fisier.txt
+(single choice)
+7. [bash] Care este variabila specială care are ca valoare codul de terminare al ultimei comenzi executate în forergound? (0.5p)
+-$@
+-$$
+-$#
+-$?
+-$!
+-$*
+(single choice)
+8.[bash] Bifați TOATE comenzile cu care putem defini o funcție bash cu numele test. (0.5p)
+-function test () {…}
+-#define test () {…}
+-declare -i test () {…}
+-test (argc, argv) {…}
+-test () {…}
+-function test {…}
+(multiple choice)
+9. [C] Care este apelul POSIX de I/O cu fișiere, utilizat pentru a crea un fișier de tip fifo? (0.5p)
+-creat
+-makefifo
+-mkfifo
+-fifomake
+-chroot
+(single choice)
+10. [C] Care este apelul POSIX de I/O cu fișiere, pe care îl utilizăm pentru a scrie informații într-un fișier de tip obișnuit? (0.5p)
+-echo
+-fprintf
+-write
+-printf
+-fwrite
+(single choice)
+11. [C] Ce semnificație are apelul fscanf(fd, "%d",&s); ? (0.5p)
+-Citește de la tastatură un șir de caractere s și îl depune în variabila întreagă fd.
+-Citește de la tastatură un număr întreg s și îl scrie în fișierul referit prin descriptorul fd.
+-Convertește un șir de caractere s într-un număr întreg, păstrat în variabila fd.
+-Citește din fișierul referit de descriptorul fd un șir de caractere, pe care îl convertește într-o valoare întreagă, depusă în variabila s.
+(single choice)
+12. [C] Specificați apelul POSIX prin care se scrie textul "SO_testul1!" în fișierul atașat descriptorului de fișier fd.  Observații: 1. NU folosiți SPAȚII. 2. Terminați apelul cu ; (PUNCT și VIRGULĂ) (0.5p).
+
+fprintf(fd,"SO_testul1!");
+
+13. [C] Bifați TOATE funcțiile ce pot fi utilizate pentru a pune lacăte pe fișiere. (0.5p)
+
+-flock
+-blockf
+-lockfile
+-fcntl
+
+Test 2
+---------------------------------------------------
+1. [bash] Care este opțiunea comenzii ls pentru a afișa, fiecare pe câte o linie, doar numele fișierelor dintr-un director, fără alte informații suplimentare? (0.5p)
+-c
+-l
+-f
+-1
+(single choice)
+2. [bash] Care este opțiunea comenzii find pentru a căuta după numele fișierelor, ce se potrivesc unui șablon dat, ignorând tipul literelor (case insensitive) ? (0.5p)
+-name
+-iname
+-lname
+-igname
+(single choice)
+3. [bash] Bifați TOATE opțiunile comenzii grep cu care putem să specificăm că dorim afișarea inclusiv a numerelor liniilor în cadrul cărora au fost găsite apariții ale șablonul căutat.  (0.5p)
+--number
+--line-number
+-i
+-n
+--count
+(multiple choice)
+
+4. [bash] Bifați TOATE variantele comenzii test cu care putem testa că un fișier este de tipul director. (0.5p)
+-test -d fisier
+-test -f fisier
+-[ -e director ]
+-test -e director
+-[ -d fisier ]
+(multiple choice)
+
+5. [bash] Bifați TOATE opțiunile comenzii cmp prin care putem specifica faptul că dorim să comparăm două fișiere în limita unui număr precizat de octeți. (0.5p)
+-n
+--max
+--limit
+-b
+--bytes
+
+(multiple choice)
+
+6. [bash] Bifați TOATE opțiunile comenzii passwd cu care putem să setăm dezactivarea unui cont la N zile după ce parola sa a expirat. (0.5p)
+-e
+--quiet
+--inactive
+--expire
+-i
+(multiple choice)
+
+7. [bash] Bifați TOATE opțiunile comenzii mkdir cu care putem cere crearea tuturor directoarelor lipsă dintr-o cale dată ca argument. (0.5p)
+-p
+-d
+--directories
+-m
+--parents
+ (multiple choice)
+ 
+ 8. [bash] Care este comanda care afișează dimensiunea în octeți a fișierului test din directorul curent? (0.5p)
+- wc -c test
+- stat --printf "%d %n\n" test
+- find test -printf "%D %f\n"
+- stat --printf "%a %n\n"
+(single choice)
+
+9. [bash] Care este comanda care afișează primele 15 linii de text din programul prg1.c aflat pe suprafața de lucru a utilizatorului curent ? (0.5p)
+- firstlines -15 Desktop/prg1.c
+- head --lines=15 ~/Desktop/prg1.c
+- cat --lines=15 Desktop/prg*.c
+- head -n -15 ~Desktop/prg1.c
+(single choice)
+
+10. [bash] Care este comanda care afișează DOAR comenzile, inclusiv cu argumentele primite, ale proceselor ce rulează sub contextul contului root? (0.5p)
+- ps aux -u root -o comm=
+- ps aux -U root -o command
+- ps -u 0 -o command=
+- ps -u root -o comm=
+(single choice)
+
+11. [C] Care dintre apelurile următoare verifică faptul că procesul apelant are drept de execuție a fișierului "ex1.sh"? (0.5p)
+
+access("ex1.sh", F_OK)
+access("ex1.sh", W_OK)
+access("ex1.sh", X_OK)
+access("ex1.sh",R_OK)
+access("ex1.sh",W_OK|R_OK)
+
+(single choice)
+
+12. [C] Care este apelul POSIX prin care se ajustează deplasamentul curent la sfârșitul fișierului referit prin descriptorul fd? (0.5p)
+lseek(fd, 0, SEEK_END);
+lseek(fd, SEEK_END);
+lseek(SEEK_SET,0,fd);
+fd=lseek(fd,0,SET_END);
+fd=lseek(0,SEEK_END);
+lseek(fd, -1, SEEK_CUR);
+
+(single choice)
+
+13. [C] Care este constanta simbolică corespunzătoare erorii ce indică următorul fapt: calea specificată în primul parametru al unui apel al funcției mkdir este prea lungă? (0.5p)
+
+14. [C] Ce indică valoarea F_UNLCK pentru câmpul l_type din structura flock, definită în fișierul header fcntl.h (pentru a folosi lacăte)? (0.5p)
+
+-Tipul blocării prin lacătul corespunzător este „blocaj în scriere”.
+-Tipul blocării prin lacătul corespunzător este „blocaj în citire”.
+-Tipul blocării prin lacătul corespunzător este „deblocaj”.
+-Tipul blocării prin lacătul corespunzător este „blocaj unic”.
+-Tipul blocării prin lacătul corespunzător este „blocaj universal”.
+-Tipul blocării prin lacătul corespunzător este „blocaj atât pentru scriere, cât și pentru citire”.
+
+TEST 3
+---------------------------------------
+1. [bash] Să se specifice ordinea corectă de înlănțuire a celor 4 comenzi de mai jos, astfel încât lanțul obținut în acest fel să afișeze 1 numai dacă fișierul test.so poate fi accesat în citire de către ceilalți utilizatori din grupul proprietarului, și respectiv 0, dacă nu.  (1p)
+                            1	2	3	4
+stat --format "%A" test.so		
+cut -c5-7		
+grep r		
+wc -l		
+
+2. [bash] Să se specifice ordinea corectă de înlănțuire a celor 4 comenzi de mai jos, astfel încât lanțul obținut în acest fel să afișeze toate procesele din sistem în formatul user:comanda:pid , ordonate după numele comenzii. (1p)
+1	2	3	4
+ps -eo user,comm,pid --no-headers		
+tr -s " "		
+cut -d" " -f1,2,3 --output-delimiter=:		
+sort -k2 -t:
+
+3. [bash] Să se specifice ordinea corectă de înlănțuire a celor 4 comenzi de mai jos, astfel încât lanțul obținut în acest fel să afișeze numele fișierului și dimensiunea pentru al treilea cel mai mare (ca dimensiune) fișier din directorul curent și subdirectoarele sale. (1p)
+1	2	3	4
+find . -printf "%p %s\n"		
+sort -k2 -n		
+tail -n 3		
+head --lines=1
+
+4. [bash] Să se scrie comanda simplă find care afișează, pentru toate fișierele cu extensia .cpp din directorul curent (parcurs recursiv pe maxim 3 nivele), doar numele acelora în al căror conținut apare textul “define” (apelați comanda adecvată prin -exec). (2p)
+
+//imagine care nu merge
+
+5. [bash] Scrieți comanda înlănțuită care selectează DOAR lista fișierelor și directoarelor aflate în directorul curent și al căror nume începe cu prefixul "lab", apoi le afișează doar pe al doilea și pe al treilea din această listă. (2p)
+
+6. [C] Scrieți apelul POSIX prin care se creează, în directorul curent de lucru, un link hard, cu numele "alias.txt", către fișierul cu numele "afile.txt" aflat în directorul părinte al directorului curent de lucru. Observații: 1. NU folosiți SPAȚII. 2. Terminați apelul cu ; (PUNCT și VIRGULĂ).  (0.5p)
+
+7. [C] Scrieți apelul POSIX prin care se deschide fișierul "fisier.txt" atât pentru citire, cât și pentru scriere, iar dacă fișierul nu există, atunci îl și creează, cu permisiuni de acces în citire și scriere doar pentru proprietar, specificate printr-o constantă numerică în OCTAL. Observații: 1. NU folosiți SPAȚII. 2. Terminați apelul cu ; (PUNCT și VIRGULĂ).  (0.5p)
+
+8. [C] Se consideră următoarea secvență de cod ce execută apelul POSIX stat pe fișierul script.sh. Bifați doar opțiunile ce sunt MINIM necesare astfel încât execuția codului să afișeze pe ecran textul "ABC". (1p)
+//Captionless Image
+Proprietarul fișierului are drept de citire.
+Proprietarul fișierului are drept de scriere.
+Proprietarul fișierului are drept de execuție.
+Colegii din grupul proprietar al fișierului au drept de citire.
+Colegii din grupul proprietar al fișierului au drept de scriere.
+Colegii din grupul proprietar al fișierului au drept de execuție.
+Utilizatorii care nu sunt în grupul proprietarului fișierului au drept de citire.
+Utilizatorii care nu sunt în grupul proprietarului fișierului au drept de scriere.
+Utilizatorii care nu sunt în grupul proprietarului fișierului au drept de execuție.
+
+(multiple choice)
+9. [C] Se consideră următoarele declarații din figura alăturată. Ce acțiune realizează apelul fcntl(fd, F_SETLKW, &L); ? (1p)
+//Captionless Image
+
+Blochează pentru scriere ultimii doi octeți, din fișierul referit prin descriptorul fd.
+
+Deblochează pentru scriere o zonă de dimensiunea a două numere întregi, din fișierul referit prin 
+descriptorul fd.
+
+Blochează pentru citire o zonă de dimensiunea a două numere întregi, de la sfârșitul fișierului referit prin descriptorul fd.
+
+Blochează pentru scriere o zonă de dimensiunea a două numere întregi, de la sfârșitul fișierului referit prin descriptorul fd.
+
+Blochează pentru scriere o zonă de dimensiunea a două numere întregi, începând cu deplasamentul curent pentru fișierul referit prin descriptorul fd.
+
+Deblochează pentru citire o zonă de dimensiunea a două numere întregi, începând cu deplasamentul curent pentru fișierul referit prin descriptorul fd.
+
+Blochează pentru scriere și pentru citire o zonă de dimensiunea a doi octeți, de la deplasamentul curent pentru fișierul referit prin descriptorul fd.
+
+(single choice)

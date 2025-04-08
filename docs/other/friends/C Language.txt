@@ -1,0 +1,8 @@
+The difference between off_t and ssize_t:
+>> ssize_t you would usually choose over off_t for write() because it handles smaller data in bytes an can be used along with size_t which easily identifies the amount of bytes that you need to write something on a file
+>>off_t: this is basically for file positions so for lseek() specifically and to check the file size which can be massive
+
+ssize_t write(int descriptor, const void buf, size_t count);
+>Descriptor: the file descriptor
+>buf: a pointer to the data that needs to be written (should be stored as a variable like this char *variable_name = (whatever)
+>count: the number of bytes to be written (can also be represented as a int but size_t is best)
