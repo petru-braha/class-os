@@ -1,0 +1,1 @@
+- /etc/passwd nu include toti utilizatorii - doar pe cei creați local pe mașină prin comenzi precum useradd, adduser, etc.qq

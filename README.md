@@ -2,7 +2,7 @@
 
 - lab1: cut grep stat
 - lab2: wc find ps
-- lab3: 
+- lab3: chained commands
 - lab6: 
   - get file type - st.st_mode & S_IFMT
   - get file octal permissions - st.st_mode & 0777
