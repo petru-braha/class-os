@@ -1,1 +1,15 @@
-- /etc/passwd nu include toti utilizatorii - doar pe cei creați local pe mașină prin comenzi precum useradd, adduser, etc.qq
+- /etc/passwd nu include toti utilizatorii - doar pe cei creați local pe mașină prin comenzi precum useradd, adduser, etc.
+
+- job == ++procese
+- proces
+  - stari
+    - ready
+    - running (after cpu schedule)
+    - waiting (syscall)
+  - container pentru ++ threads
+- o politica de planificare este preemptiva daca trece la ready
+- nepreemptiv daca CPU-ul nu mai poate fi luat de la procesul respectiv
+- planificatorul alege un proces ready si il executa pentru o cuanta de timp
+  - daca un proces trece peste acest timp => interupt
+
+- paralelizare i/o cu calcule
