@@ -1,0 +1,5 @@
+- "$1" better than $1 - daca argumentul contine spatii albe?
+- $(...) e pentru comenzi, nu pentru calcule numerice
+
+- lacatele de citire nu lasa suprascrierea zonei
+- lacatele de scriere nu permit citirea sau suprascrierea zonei
