@@ -1,0 +1,6 @@
+- operatorul || spune asa: executa a doua comanda daca prima esueaza
+- wait fara argumente asteapta toate child processes sa se termine
+- https://www.geeksforgeeks.org/single-program-multiple-data-spmd-model/
+
+- man 7 signal
+- kill -id_signal pid

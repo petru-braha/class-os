@@ -1,6 +1,24 @@
-- operatorul || spune asa: executa a doua comanda daca prima esueaza
-- wait fara argumente asteapta toate child processes sa se termine
-- https://www.geeksforgeeks.org/single-program-multiple-data-spmd-model/
+anonymous - fork
+msync - disk - memory
+map private - read
+write - map shared
 
-- man 7 signal
-- kill -id_signal pid
+mapare -
+
+dupa mapare putem inchide fd
+permisiunile de mapare trebuie sa coincida cu cele de deschidere de file
+
+
+mutex = semafor pentru un singur proces
+
+lacat
+  - procese care nu implementeaza
+  - fiser efect
+
+semafor
+  - zona de cod
+
+sem_open
+sem_wait
+sem_post
+
