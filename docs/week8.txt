@@ -1,0 +1,7 @@
+race conditions
+  - interrupts in a lot of contexts
+  - block writing and reading until write finishes
+  - block writing until read finishes
+
+- struct flock solves this for files
+- mutexes for shared data
