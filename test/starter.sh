@@ -7,6 +7,13 @@ if [ $# -ne 1 ]; then
 fi
 
 # compilation
+rm -f fifo
+gcc ./coordonator/supervisor.c -o ./coordonator/supervisor.out
+if [ $? -ne 0 ]; then
+  echo "error: compilation failed"
+  exit 3
+fi
+
 gcc ./subordinates/worker1.c -o ./subordinates/worker1.out
 if [ $? -ne 0 ]; then
   echo "error: compilation failed"
@@ -21,7 +28,7 @@ fi
 
 # program launch
 p=$1
-$file="./input_data.txt"
+file="./input_data.txt"
 if [ $p -eq 1 ]; then
   ./subordinates/worker1.out $file &
   sleep 2
