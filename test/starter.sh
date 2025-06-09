@@ -48,4 +48,4 @@ fi
 echo "all three processes ended"
 # echo conținutul mapării nepersistente cu nume
 # delete maparea nepersistentă cu nume
-# delete canalul fifo
+rm -f fifo

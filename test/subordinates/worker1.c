@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/mman.h>
 #include <math.h>
 #include "../util/h0.h"
 
@@ -29,7 +30,29 @@ void check_triangle(int numbers[INPUT_SIZE][5], const int index_row)
     numbers[i][3] = 1;
   }
 
-  // todo send
+  // map send
+  int size_map = 4 + index_row * 5 * sizeof(int);
+  const char *shm_name = "./shared_memory";
+  int shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0600);
+  if (-1 == shm_fd)
+    report_error(__LINE__, "error: shm_open()", ROLE_WRK1);
+
+  if (-1 == ftruncate(shm_fd, size_map))
+    report_error(__LINE__, "error: ftruncate()", ROLE_WRK1);
+
+  void *shm_ptr = mmap(
+      NULL, size_map,
+      PROT_WRITE | PROT_READ,
+      MAP_SHARED, shm_fd, 0);
+  if (MAP_FAILED == shm_ptr)
+    report_error(__LINE__, "error: MAP_FAILED()", ROLE_WRK1);
+
+  if (-1 == close(shm_fd))
+    report_error(__LINE__, "error: close() - check()", ROLE_WRK1);
+
+  *(int *)shm_ptr = index_row;
+  memcpy(shm_ptr + sizeof(int), numbers, index_row * 5 * sizeof(int));
+  // todo get data;
 
   // check for p
   for (int i = 0; i < index_row; i++)
