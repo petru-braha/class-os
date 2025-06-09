@@ -1,0 +1,24 @@
+fork
+
+- utilizator real
+- utilizator efectiv (setuid == 1)
+- shared memory is NOT by default
+- waitpid(pid)
+
+- zombie == child care termina inaintea parintelui
+  - parintele este responsabil sa elimine toti zombies
+- child cu ppid 1 <= parintele a terminat primul
+
+
+exec
+
+- list
+- vector
+
+- simple
+- env
+- path
+- env, path
+
+- descriptorii raman deschisi
+- signal nu raman

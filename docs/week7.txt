@@ -1,0 +1,21 @@
+virtual memory 
+
+solves
+- not enough memory (in ram)
+- memory fragmentation (enough total memory, but it is split)
+- memory corruption and overlapping of multiple apps
+
+virtual memory == each process has its own address space
+  == maps the process adress to physical address
+    - that can be ram/swap
+    - page table returns the physical map of virtual memory
+
+swap-disk == additional memory when needed
+- page fault - exception: not found in ram -> search on disk by os
+
+- last 12 bits of an adress are called offset of the page
+- each program has a page table: virtual page number => ppn
+
+cache through tlb - store the page translation
+
+- proces == program care ruleaza

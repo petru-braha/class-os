@@ -12,7 +12,7 @@
 
 - test:
   - signal
-  - maps
+  - mmap
   - fork
   - exec
   - pipe

@@ -1,12 +1,14 @@
-signals - implicit VS explicit (calling kill)
-  - sync VS async (semnale non-anticipate)
-  - standard VS real-time (definite by us)
-  - intrerupe executia, face apel la handler, reia executia
+signals
+
+implicit VS explicit (calling kill)
+- sync VS async (semnale non-anticipate)
+- standard VS real-time (definite by us)
+- intrerupe executia, face apel la handler, reia executia
 
 handler
-  - defined by us => corruption
-  - blocheaza semnale, nu ignora
-  - blocarea le pune in coada pana la un moment precizat
+- defined by us => corruption
+- blocheaza semnale, nu ignora
+- blocarea le pune in coada pana la un moment precizat
 
 - kill, signal, sigprocmask, sigpending, sigsuspend (asteapta doar anume tipuri de semnale)
 - SIGKILL, SIGSTOP eternal
