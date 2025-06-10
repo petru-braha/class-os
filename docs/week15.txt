@@ -12,10 +12,11 @@ channels
   - named - fifo
 - persistent - message queues
 
-pipes - opened by default VS fifos
-  - once closed forever closed VS fifos
-- ce se citeste se consuma si sterge
+pipes 
+- opened by default VS fifos
+- once closed forever closed VS fifos
 
+- ce se citeste se consuma si sterge
 - read returns 0 daca toate procesele au canalul de scriere inchis
 - write kills process daca toate procesele au canalul de citire inchis
 - deschiderea canalelor este blocanta
