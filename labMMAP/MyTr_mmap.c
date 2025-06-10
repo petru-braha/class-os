@@ -32,8 +32,8 @@ void same_file(
 
   // process
   for (size_t i = 0; addr != final; addr++)
-    if (ch0 == *addr)
-      *addr = ch1;
+    if (ch0 == *(char *)addr)
+      *(char *)addr = ch1;
 
   // close the job
   if (-1 == msync(addr, file_data.st_size, MS_SYNC))
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
   }
 
   struct stat file_data;
-  if (-1 == fstat(fd0, &file_data)))
+  if (-1 == fstat(fd0, &file_data))
     print_error("fstat() failed()");
 
   void *add0 = mmap(NULL, file_data.st_size, PROT_READ, MAP_PRIVATE, fd0, 0);
@@ -104,10 +104,10 @@ int main(int argc, char *argv[])
   // process
   void *final = add0 + file_data.st_size;
   for (; add0 != final; add0++, add1++)
-    if (ch0 == *add0)
-      *add1 = ch1;
+    if (ch0 == *(char *)add0)
+      *(char *)add1 = ch1;
     else
-      *add1 = *add0;
+      *(char *)add1 = *(char *)add0;
 
   // close the job
   if (-1 == msync(add1, file_data.st_size, MS_SYNC))
