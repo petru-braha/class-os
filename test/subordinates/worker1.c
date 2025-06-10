@@ -55,21 +55,26 @@ void check_triangle(int numbers[INPUT_SIZE][5], const int index_row)
   // wait for the data to be updated
   for (int *count = shm_ptr; *count != MMAP_KEY;)
     ;
-  if (-1 == munmap(shm_ptr, size_map))
-    report_error(__LINE__, "munmap()", ROLE_WRK1);
-  if (-1 == shm_unlink(NAME_SHM))
-    report_error(__LINE__, "shm_unlink()", ROLE_WRK1);
 
   // check for p
-  for (int i = 0; i < index_row; i++)
+  void *init = shm_ptr;
+  shm_ptr += sizeof(int);
+  for (int i = 0; i < index_row; i++, shm_ptr += 5 * sizeof(int))
   {
-    if (0 == numbers[i][3])
+    int *arr = (int *)shm_ptr;
+    if (0 == arr[3])
       continue;
-    numbers[i][3] *= 2;
+    numbers[i][3] = arr[3] * 2;
     numbers[i][4] = get_area(
         numbers[i][0], numbers[i][1], numbers[i][2],
         numbers[i][3] / 2);
   }
+
+  shm_ptr = init;
+  if (-1 == munmap(shm_ptr, size_map))
+    report_error(__LINE__, "munmap()", ROLE_WRK1);
+  if (-1 == shm_unlink(NAME_SHM))
+    report_error(__LINE__, "shm_unlink()", ROLE_WRK1);
 }
 
 int main(int argc, char *argv[])

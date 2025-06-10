@@ -35,7 +35,7 @@ if [ $p -eq 1 ]; then
   ./subordinates/worker2.out
 
 elif [ $p -eq 2 ]; then
-  ./subordinates/worker2.out &
+  ./subordinates/worker2.out 1 &
   sleep 3
   ./subordinates/worker1.out $file
 

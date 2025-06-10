@@ -43,7 +43,7 @@ void receive(const int count, const int fd)
   int count_invalid = 0;
   for (int i = 0; i < count; i++)
   {
-    if (0 == numbers[i][4])
+    if (0 == numbers[i][3])
     {
       count_invalid++;
       fprintf(stderr, "tripleta a,b,c nu poate reprezenta"
@@ -53,7 +53,7 @@ void receive(const int count, const int fd)
       fprintf(stderr, "tipleta a,b,c"
                       " reprezintă lungimile laturilor unui triunghi"
                       " ce are perimetrul %d și aria %d.\n",
-              numbers[i][4], numbers[i][5]);
+              numbers[i][3], numbers[i][4]);
   }
 
   fprintf(stderr, "variante totale: %d; variante invalide: %d.\n",

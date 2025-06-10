@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 const char FIFO_STRG[10] = "./fifo";
 #define STRG_SIZE 256
