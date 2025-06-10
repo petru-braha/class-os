@@ -1,17 +1,16 @@
 mmap
 
-- msync - face propagarea manuala a schimbarilor din memorie pe disc
-- MAP_PRIVATE + msync still does not do the job
-- kernel handles writing to this of the dirty pages
-
-map - persistent between files
-  - not persistent - ipc
-
-non-persistent map - anonymous with forking
-  - with names
+- non-persistent - ipc
+  - anonymous - forking
+  - named
     - kept alive until
       - closing the kernel
       - all processes will unlink
+- persistent - files
+  
+- msync - face propagarea manuala a schimbarilor din memorie pe disc
+- kernel handles writing to this of the dirty pages
+- MAP_PRIVATE + msync still does not do the job
 
 shm_open
 ftruncate
@@ -21,5 +20,3 @@ open/close
 shm_unlink
 
 long PageSize = sysconf(_SC_PAGE_SIZE);
-
-- 3 tipuri de exercitii

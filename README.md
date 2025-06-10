@@ -11,8 +11,14 @@
   - dirent
 
 - test:
+
   - signal
   - mmap
   - fork
   - exec
   - pipe
+
+- work more on:
+
+  - signal
+  - sem
