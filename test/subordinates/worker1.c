@@ -31,28 +31,34 @@ void check_triangle(int numbers[INPUT_SIZE][5], const int index_row)
   }
 
   // map send
-  int size_map = 4 + index_row * 5 * sizeof(int);
-  const char *shm_name = "./shared_memory";
-  int shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0600);
+  int size_map = sizeof(int) + index_row * 5 * sizeof(int);
+  int shm_fd = shm_open(NAME_SHM, O_CREAT | O_RDWR, 0600);
   if (-1 == shm_fd)
-    report_error(__LINE__, "error: shm_open()", ROLE_WRK1);
+    report_error(__LINE__, "shm_open()", ROLE_WRK1);
 
   if (-1 == ftruncate(shm_fd, size_map))
-    report_error(__LINE__, "error: ftruncate()", ROLE_WRK1);
+    report_error(__LINE__, "ftruncate()", ROLE_WRK1);
 
   void *shm_ptr = mmap(
       NULL, size_map,
       PROT_WRITE | PROT_READ,
       MAP_SHARED, shm_fd, 0);
   if (MAP_FAILED == shm_ptr)
-    report_error(__LINE__, "error: MAP_FAILED()", ROLE_WRK1);
+    report_error(__LINE__, "MAP_FAILED()", ROLE_WRK1);
 
   if (-1 == close(shm_fd))
-    report_error(__LINE__, "error: close() - check()", ROLE_WRK1);
+    report_error(__LINE__, "close() - check()", ROLE_WRK1);
 
   *(int *)shm_ptr = index_row;
   memcpy(shm_ptr + sizeof(int), numbers, index_row * 5 * sizeof(int));
-  // todo get data;
+
+  // wait for the data to be updated
+  for (int *count = shm_ptr; *count != MMAP_KEY;)
+    ;
+  if (-1 == munmap(shm_ptr, size_map))
+    report_error(__LINE__, "munmap()", ROLE_WRK1);
+  if (-1 == shm_unlink(NAME_SHM))
+    report_error(__LINE__, "shm_unlink()", ROLE_WRK1);
 
   // check for p
   for (int i = 0; i < index_row; i++)
@@ -86,11 +92,11 @@ int main(int argc, char *argv[])
   if (0 == pid)
   {
     if (-1 == close(pipe_anonymous[0]))
-      report_error(__LINE__, "error: close() failed in child", ROLE_WRK1);
+      report_error(__LINE__, "close() failed in child", ROLE_WRK1);
     if (-1 == dup2(pipe_anonymous[1], STDOUT_FILENO))
-      report_error(__LINE__, "error: close() failed in child", ROLE_WRK1);
+      report_error(__LINE__, "close() failed in child", ROLE_WRK1);
     if (-1 == close(pipe_anonymous[1]))
-      report_error(__LINE__, "error: close() failed in child", ROLE_WRK1);
+      report_error(__LINE__, "close() failed in child", ROLE_WRK1);
 
     char *path_supervisor = "./coordonator/supervisor.out";
     char *argv_supervisor[] = {path_supervisor, argv[1], NULL};
@@ -103,7 +109,7 @@ int main(int argc, char *argv[])
   {
     // get from supervisor from file
     if (-1 == close(pipe_anonymous[1]))
-      report_error(__LINE__, "error: close() failed in parent", ROLE_WRK1);
+      report_error(__LINE__, "close() failed in parent", ROLE_WRK1);
 
     int numbers[INPUT_SIZE][3] = {0}, index_row = 0;
     if (-1 == read(pipe_anonymous[0], &index_row, sizeof(int)))
@@ -125,7 +131,7 @@ int main(int argc, char *argv[])
     // send to supervisor
     int fifo = open(FIFO_STRG, O_WRONLY);
     if (-1 == fifo)
-      report_error(__LINE__, "error: fifo open() failed in parent", ROLE_WRK1);
+      report_error(__LINE__, "fifo open() failed in parent", ROLE_WRK1);
 
     if (-1 == write(fifo, results, index_row * 5 * sizeof(int)))
       report_error(__LINE__, "read() failed in send()", ROLE_WRK1);

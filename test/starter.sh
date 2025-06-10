@@ -14,7 +14,7 @@ if [ $? -ne 0 ]; then
   exit 3
 fi
 
-gcc ./subordinates/worker1.c -o ./subordinates/worker1.out
+gcc ./subordinates/worker1.c -o ./subordinates/worker1.out -lm # math lib
 if [ $? -ne 0 ]; then
   echo "error: compilation failed"
   exit 3
