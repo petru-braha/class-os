@@ -1,11 +1,16 @@
 pipes
 
-- non-persistent shared memory object
-  - name
-  - anonymous
-- channels
-  - non-persistent == pipes, fifo
-  - persistent == message queues
+shared memory object
+- non-persistent
+  - anonymous - forks
+  - named - shm
+- persistent - files
+
+channels
+- non-persistent
+  - anonymous - pipes
+  - named - fifo
+- persistent - message queues
 
 pipes - opened by default VS fifos
   - once closed forever closed VS fifos
@@ -13,5 +18,9 @@ pipes - opened by default VS fifos
 
 - read returns 0 daca toate procesele au canalul de scriere inchis
 - write kills process daca toate procesele au canalul de citire inchis
+- deschiderea canalelor este blocanta
 
-- deschiderea canalelor este blocanta?
+- kernel level persistency
+  - shared memory, sem, channels
+  - all processes close their end to these
+  - kernel is stoped

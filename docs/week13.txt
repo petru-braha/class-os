@@ -2,21 +2,19 @@ sem_post - ++
 sem_wait - --
 
 sem
-  - anonymous
-    - between processes inside of a shared memory
-    - between threads global variable
-  - named
+- anonymous
+  - between processes inside of a shared memory
+  - between threads global variable
+- named
   
-  - kernel level persistency
-
 solve race condition
-  - flock
-  - mlock
-  - sem
-  - mutex (semafor pentru un singur proces)
+- flock
+- mlock
+- sem
+- mutex (semafor pentru un singur proces)
 
 lacat
-  - procese care nu implementeaza
-  - fiser efect
+- procese care nu implementeaza
+- fiser efect
 semafor
-  - zona de cod
+- zona de cod
