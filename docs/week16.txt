@@ -1,0 +1,5 @@
+sem vs mutex
+
+- increment == unlock
+- mutex is owned by a thread - no one else can unlock it
+- while any other process can increment the semaphore 
