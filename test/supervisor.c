@@ -46,6 +46,7 @@ void recv(const int fifo, sem_t *sem)
   int count = 0, count_invalid = 0;
   while (0 < (bytes = read(fifo, number, sizeof(number))))
   {
+    count++;
     if (0 == number[3])
     {
       count_invalid++;
@@ -98,7 +99,7 @@ int main(int argc, char *argv[])
     if (-1 == close(pipe_anonymous[0]))
       report_error(__LINE__, __FILE__, "parent close(0) failed");
 
-    if (-1 == mkfifo(FIFO_PATH, 0600))
+    if (-1 == mkfifo(FIFO_PATH, 0600) && EEXIST != errno)
       report_error(__LINE__, __FILE__, "mkfifo() failed");
     int fifo = open(FIFO_PATH, O_RDONLY);
     if (-1 == fifo)
@@ -110,17 +111,20 @@ int main(int argc, char *argv[])
 
     //! transmission
     send(argv[1], pipe_anonymous[1]);
+    if (-1 == close(pipe_anonymous[1]))
+      report_error(__LINE__, __FILE__, "parent close(1) failed");
+
     recv(fifo, sem_recv);
 
     // close
     if (-1 == wait(NULL))
       report_error(__LINE__, __FILE__, "wait() failed");
 
-    if (-1 == close(pipe_anonymous[1]))
-      report_error(__LINE__, __FILE__, "parent close(1) failed");
     if (-1 == close(fifo))
       report_error(__LINE__, __FILE__, "parent close() failed");
     if (-1 == sem_close(sem_recv))
       report_error(__LINE__, __FILE__, "sem_close() failed");
+    if (-1 == sem_unlink(SEM1_PATH))
+      report_error(__LINE__, __FILE__, "sem_unlink() failed");
   }
 }

@@ -26,7 +26,7 @@ void send_w2(const int fd, void *shm_ptr, sem_t *sem)
   int number[4] = {0, 0, 0, 0};
 
   int bytes = 0;
-  while (0 < (bytes = read(fd, number, sizeof(number))))
+  while (0 < (bytes = read(fd, number, 3 * sizeof(int))))
   {
     number[3] = check_triangle(number);
     memcpy(shm_ptr, number, sizeof(number));
