@@ -1,5 +1,12 @@
 sem vs mutex
 
 - increment == unlock
+
 - mutex is owned by a thread - no one else can unlock it
 - while any other process can increment the semaphore 
+
+- mutex can decrement only once
+- while the sem can do it countless
+
+- sem must be named or placed inside of a memory mapping
+- in order for multiple processes to be able to accept it
